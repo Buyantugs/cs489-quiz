@@ -5,6 +5,9 @@ import edu.miu.cs489.module.EmailAddress;
 import edu.miu.cs489.module.Label;
 import edu.miu.cs489.module.PhoneNumber;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
@@ -29,6 +32,9 @@ public class Main {
                     })
         };
 
+        // Sort the contract array by last name
+        Arrays.sort(contractList, Comparator.comparing(Contract::getLastName));
+
         System.out.println("Print contract object: ");
 
         for(Contract contact: contractList) {
@@ -49,32 +55,32 @@ public class Main {
         System.out.println("]");
     }
 
-    private static StringBuilder printJsonPhones(PhoneNumber[] phones) {
+//    private static StringBuilder printJsonPhones(PhoneNumber[] phones) {
+//
+//        if(phones.length==0) {
+//            return new StringBuilder("null ");
+//        }
+//
+//        StringBuilder stb= new StringBuilder();
+//        stb.append("[");
+//        for (PhoneNumber phone : phones) {
+//            stb.append("  " + phoneToJson(phone) + ",");
+//        }
+//        stb.append("]");
+//
+//        return stb;
+//    }
 
-        if(phones.length==0) {
-            return new StringBuilder("null ");
-        }
-
-        StringBuilder stb= new StringBuilder();
-        stb.append("[");
-        for (PhoneNumber phone : phones) {
-            stb.append("  " + phoneToJson(phone) + ",");
-        }
-        stb.append("]");
-
-        return stb;
-    }
-
-    private static String phoneToJson(PhoneNumber phone) {
-        return "{\"Phone No\": \"" + phone.phone() + "\", \"Label\": \"" + phone.label()+ "}";
-    }
+//    private static String phoneToJson(PhoneNumber phone) {
+//        return "{\"Phone No\": \"" + phone.phone() + "\", \"Label\": \"" + phone.label()+ "}";
+//    }
 
     private static String contractToJson(Contract contract) {
         return new StringBuilder().append("{\"firstName\": \"")
                 .append(contract.getFirstName()).append("\", \"lastName\": \"")
                 .append(contract.getLastName()).append("\", \"company\": \"")
                 .append(contract.getCompany()).append("\", \"jobTitle\": ")
-                .append(contract.getJobTitle()).append(printJsonPhones(contract.getPhoneList()))
+                //.append(contract.getJobTitle()).append(printJsonPhones(contract.getPhoneList()))
                 .append("}").toString();
     }
 }
